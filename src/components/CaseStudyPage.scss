@@ -1,0 +1,55 @@
+@import "./src/colors.scss";
+
+.caseImage {
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 2rem;
+}
+
+.imagecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.caseExampleImage {
+    width: 30%;
+    min-width: 400px;
+    border-radius: 30px;
+    overflow: hidden;
+    margin: 8px;
+}
+
+.case-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.case-container > div {
+    width: 30%;
+    min-width: 400px;
+}
+
+.case-Link {
+    font-weight: bold;
+    border: 1px solid $blue;
+    padding: 5px 15px;
+    border-radius: 30px;
+    margin-right: 20px;
+}
+
+.case-Link.demo {
+}
+
+.case-Link.github {
+    opacity: 50%;
+}
+
+.case-text {
+    margin-bottom: 20px;
+}

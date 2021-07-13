@@ -1,0 +1,233 @@
+
+@import './src/colors.scss';
+
+body{
+	background: #f2f3f7;
+	
+
+	font-size: 16px;
+	line-height: 1.8em;
+}
+.container{
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content:center;
+	width: 90%;
+	height:100px;
+	margin:0em auto;
+	
+}
+h1{
+	color: $blue;	
+	line-height: 1.25;	
+	margin-bottom:0.5em;
+}
+
+h2{
+	color: $blue;
+	font-size: 24px;
+	line-height: 1.25;	
+}
+
+a,a:active,a:link{
+	color: $blue;
+	text-decoration: none;
+}
+
+.page{
+	max-width:1201px;
+	//background-color: green;
+
+	margin:0em auto;
+	margin-top:30px;
+		transition: all 500ms ease;
+	
+}
+
+// // all over 769 landscape
+@media screen and (min-width: 767px) and (max-width: 1200px) {
+   .page{
+	transition: all 500ms ease;
+	max-width:768px;
+//background-color: blue;
+	margin:0em auto;
+	margin-top:30px;
+	
+}
+
+
+}
+@media screen and (min-width: 400px) and (max-width: 766px) {
+   .page{
+transition: all 500ms ease;
+	//background-color: red;
+	width: 90%;
+	max-width:401px;
+	margin:0em auto;
+	margin-top:30px;
+	
+}
+
+}
+
+
+.logo{
+	height:40px;
+}
+
+.tab-slider--nav{
+
+	
+	
+}
+
+
+
+
+.tab-slider--tab{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	float: left;
+	margin: 0;
+	padding: 0px;
+	list-style: none;
+	position: relative;
+	border-radius: $tab-border-radius;
+	//overflow: hidden;
+	background: #e9e9ed;
+	height: $tab-height;
+	//user-select: none; 
+
+	
+	&:after{
+		content: "";
+		width: 15%;
+		background: white;
+	
+		height: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		transition: all 250ms ease-in-out;
+		border-radius: $tab-border-radius;
+	}
+
+	&.slideAll:after{
+		
+		width: 15%;
+
+		left: 0px;
+	
+	}
+
+	&.slideAboutMe:after{
+		left: 14%;
+		width: 27%;
+	}
+
+		&.slideProjects:after{
+		left: 40%;
+		width: 26%;
+	}
+
+		&.slideComponents:after{
+		left: 66%;
+		width: 34%;
+	}
+}
+
+.tab-slider--text {
+	font-size: 16px;
+	line-height: 1;
+	text-align: center;
+	padding: 11px $base-margin;
+	position: relative;
+	z-index: 2;
+	cursor: pointer;
+	display: inline-block;
+	transition: color 250ms ease-in-out;
+	
+}
+
+
+
+.tab-slider--text:hover{
+	opacity: 70%;
+}
+
+.tab-slider--text:active:visited:focus{
+	background-color: transparent;
+}
+
+.tab-slider--content{
+	display: none;
+	&.show{
+		display:block;
+	}
+}
+
+
+//* ================================= Reset */
+
+*::before,
+*::after,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+$font-noto-sans: 'Noto Sans', sans-serif;
+$font-open-sans: 'Open Sans', sans-serif;
+
+
+:root {
+ 
+  font-family: $font-open-sans;
+  font-weight: 400;
+
+
+color: $blue;
+}
+
+
+.react-grid-layout {
+  position: relative;
+  transition: height 1000ms ease;
+}
+.react-grid-item {
+  transition: all 2000ms ease;
+  transition-property: left, top;
+}
+.react-grid-item.cssTransforms {
+  transition-property: transform;
+}
+.react-grid-item.resizing {
+  z-index: 1;
+  will-change: width, height;
+}
+
+.react-grid-item.react-draggable-dragging {
+  transition: none;
+  z-index: 3;
+  will-change: transform;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: rgba(32, 32, 32, 0.534);
+  border-radius: 30px;
+  opacity: 0.2;
+  transition-duration: 1000ms;
+  z-index: 2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
