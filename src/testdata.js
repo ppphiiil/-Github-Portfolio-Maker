@@ -178,7 +178,7 @@ export const imageData = [
         format: 'portrait',
         shortDescription: 'berlin',
         longDescription: 'Berlin',
-        image: '../map/map.png',
+        image: 'map/map.png',
         category: 'Image',
         batches: {
             featured: false,

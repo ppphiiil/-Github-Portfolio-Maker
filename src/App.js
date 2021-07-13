@@ -120,7 +120,7 @@ function App() {
     { i: 'case3', x: 6, y: 4, w: 6, h: 3, },
     { i: 'case4', x: 3, y: 3, w: 3, h: 6, },
     { i: 'case5', x: 6, y: 3, w: 6, h: 3, },
-    { i: 'aboutme-main', x: 0, y: 0, w: 9, h: 6, },
+    { i: 'aboutme-main', x: 6, y: 0, w: 9, h: 6, },
     { i: 'map', x: 9, y: 0, w: 3, h: 3, },
     { i: 'linkedin', x: 0, y: 2, w: 3, h: 3, },
     { i: 'github', x: 0, y: 4, w: 3, h: 3, },
