@@ -308,7 +308,7 @@ function App() {
               <li onClick={ clickTabAll } class="tab-slider--text active" id="linkTextAll">All</li>
               <li onClick={ clickTabAboutMe } class="tab-slider--text" id="linkTextAboutMe">Aboutme</li>
               <li onClick={ clickTabProjects } class="tab-slider--text " id="linkTextProjects">Projects</li>
-              <li onClick={ clickTabComponents } class="tab-slider--text " id="linkTextComponents">Components</li>
+              {/* <li onClick={ clickTabComponents } class="tab-slider--text " id="linkTextComponents">Components</li> */ }
             </ul>
           </div>
           <a href={ `mailto:${mail}` }>contact</a>
