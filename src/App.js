@@ -6,7 +6,7 @@ import logo from "./logo/logo.png"
 import {  aboutMeComponentData, socialIconComponentData, articlesData, imageData, mail } from "./testdata"
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AboutMe from './components/AboutMe';
 import Image from './components/Image';
