@@ -1,0 +1,35 @@
+*::before,
+*::after,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local("./font/Roboto"),format("truetype");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+
+.portfolio-h3{
+    font-size: 1.5rem;
+}
+
+
+
+.portfolio-image{
+    width:200px;
+    display:block;
+}
+
+.showPortfolio-page{
+    width:97%;
+    max-width: 960px;
+    margin: 0 auto;
+    font-family:  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
+}
+
+

@@ -1,12 +1,25 @@
 
 @import './src/colors.scss';
 
+.spinner-container{
+	display:flex;
+	justify-content: center;
+	padding:50px;
+	align-items:center;
+
+.spinner{
+		padding-right:10px;
+	}
+	
+}
+
+
 body{
-	background: #f2f3f7;
+	background-color: #f2f3f7 !important;
 	
 
 	font-size: 16px;
-	line-height: 1.8em;
+	//line-height: 1.8em;
 }
 .container{
 	display:flex;
@@ -37,7 +50,8 @@ a,a:active,a:link{
 }
 
 .page{
-	max-width:1201px;
+	width:90%;
+	max-width: 960px;
 	//background-color: green;
 
 	margin:0em auto;
@@ -48,27 +62,27 @@ a,a:active,a:link{
 
 // // all over 769 landscape
 @media screen and (min-width: 767px) and (max-width: 1200px) {
-   .page{
-	transition: all 500ms ease;
-	max-width:768px;
-//background-color: blue;
-	margin:0em auto;
-	margin-top:30px;
-	
-}
+//    .page{
+// 	transition: all 500ms ease;
+// 	max-width:768px;
+// //background-color: blue;
+// 	margin:0em auto;
+// 	margin-top:30px;
+// 	
+// }
 
 
 }
 @media screen and (min-width: 400px) and (max-width: 766px) {
-   .page{
-transition: all 500ms ease;
-	//background-color: red;
-	width: 90%;
-	max-width:401px;
-	margin:0em auto;
-	margin-top:30px;
-	
-}
+//    .page{
+// transition: all 500ms ease;
+// 	//background-color: red;
+// 	width: 90%;
+// 	max-width:401px;
+// 	margin:0em auto;
+// 	margin-top:30px;
+// 	
+// }
 
 }
 
@@ -76,13 +90,6 @@ transition: all 500ms ease;
 .logo{
 	height:40px;
 }
-
-.tab-slider--nav{
-
-	
-	
-}
-
 
 
 
