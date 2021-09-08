@@ -125,7 +125,7 @@ function App() {
                 autoSize={ true }
                 isResizable={ true }
                 isBounded={ true }
-                isDraggable={ true }
+                isDraggable={ false }
                 measureBeforeMount={ true }
                 compactType={ "vertical" }
                 useCSSTransforms={ false }
