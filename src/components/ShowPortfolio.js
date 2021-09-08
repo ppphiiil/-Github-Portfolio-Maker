@@ -254,15 +254,6 @@ const spinner = <div className="spinner-container">
 //import image1 from "../caseStudies/ikea/ikea.png"
 
 
-// 
-const GlobalStyle = createGlobalStyle`
-    @font-face {
-        font-family: 'Roboto';
-        src: local('./font/Roboto');
-        font-weight: 300;
-        font-style: normal;
-    }
-`;
 
 
 const ContainerImage = styled.div`
@@ -526,7 +517,7 @@ function CaseStudy( { languages_topics, demolink, visible, mainimage, title, des
 
   return (
     <>
-      <GlobalStyle />
+     
       <Card style={ visible === false ? { opacity: "30%" } : { opacity: "100%" }}>
         <a target="_blank" href={ demolink } rel="noreferrer">
           <CardLink />
