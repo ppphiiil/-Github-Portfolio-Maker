@@ -98,7 +98,7 @@ export default function AboutMe( props ) {
                 <Button>
                     <a href={ `mailto:${mail}` }>Contact me</a>
                 </Button>
-                <Text><div><h1>{ props.data.title }</h1>{ props.data.longDescription }</div></Text>
+                <Text><div><h1>{ props.data.title }</h1><p>{ props.data.longDescription }</p></div></Text>
             </Flex>
         </Container>
     );
