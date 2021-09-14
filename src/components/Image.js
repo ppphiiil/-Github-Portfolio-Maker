@@ -10,6 +10,7 @@ export default function Image( props ) {
     justify-Content:center;
     align-items:center;
     border-Radius: 32px;
+    background-position: center;
     `
     return (
         <Container style={ props.visible === false ? { opacity: "30%" } : { opacity: "100%" } }>
