@@ -1,4 +1,4 @@
-import { Spinner } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner'
 import React, {useEffect, useState, useContext} from 'react';
 import { createGlobalStyle } from 'styled-components'
 
@@ -148,11 +148,26 @@ function ShowPortfolio({githubUsername,colorShema}) {
   );
 
 
-  //take only 5 repo Elements fpr Preview
-  const portfolioPreviewData = repoData?repoData.filter ((repo, key) => {
-    return true
+
+let allReposWithStarInName = repoData?repoData.filter ((repo, key) => {
+    return repo.name[0]==="-"
     //return key < 5;
   }):null;
+
+
+  const allReposWithoutStarInName = repoData?repoData.filter ((repo, key) => {
+    return repo.name[0]!=="-"
+    //return key < 5;
+  }):null;
+
+
+ const portfolioPreviewData = repoData?[...allReposWithStarInName,...allReposWithoutStarInName]:null;
+
+  // //take only 5 repo Elements fpr Preview
+  // const portfolioPreviewData = repoData?repoData.filter ((repo, key) => {
+  //   return true
+  //   //return key < 5;
+  // }):null;
 
 
 console.log("repoData",repoData);
@@ -213,6 +228,7 @@ let topicsFilterElement =(countedTopics)=>{
 
 const spinner = <div className="spinner-container">
   <div className="spinner">
+  
     <Spinner  animation="border" role="status">
     <span className="visually-hidden">Loading...</span>
     </Spinner></div>
@@ -532,7 +548,7 @@ function CaseStudy( { languages_topics, demolink, visible, mainimage, title, des
 
         <Details>
           <div>
-            <h3 className="portfolio-h3">{ title }</h3>
+            <h3 className="portfolio-h3">{ title[0]==="-"?title.substr(1,title.length ):title }</h3>
             <Description>{ description }</Description>
           </div>
           <div>
