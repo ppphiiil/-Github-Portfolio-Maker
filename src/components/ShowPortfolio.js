@@ -1,6 +1,7 @@
+import { Spinner } from 'react-bootstrap';
 import React, {useEffect, useState, useContext} from 'react';
 import { createGlobalStyle } from 'styled-components'
-import { Spinner } from 'react-bootstrap';
+
 
 import styled from 'styled-components';
 
