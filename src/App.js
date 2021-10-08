@@ -1,122 +1,95 @@
-import { Responsive, WidthProvider } from 'react-grid-layout';
-import { Route, HashRouter, Switch } from "react-router-dom"
-import React, { useEffect, useState } from 'react';
-import "./App.scss"
-import logo from "./logo/logo.png"
-import {  aboutMeComponentData, socialIconComponentData, articlesData, imageData, mail } from "./testdata"
+import { Responsive, WidthProvider } from 'react-grid-layout'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import React, { useEffect, useState, useRef, useContext } from 'react'
+import './App.scss'
+import { Button, Input } from 'antd'
+import 'antd/dist/antd.css'
+import {
+  aboutMeComponentData,
+  socialIconComponentData,
+  articlesData,
+  imageData,
+  mail
+} from './testdata'
 
+import MyContext from './MyContext'
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
-import AboutMe from './components/AboutMe';
-import Image from './components/Image';
-import SocialIcon from "./components/SocialIcon"
-import ShowPortfolio from "./components/ShowPortfolio"
+import AboutMe from './components/AboutMe'
+import Image from './components/Image'
+import SocialIcon from './components/SocialIcon'
+import ShowPortfolio from './components/ShowPortfolio'
 
+const ResponsiveGridLayout = WidthProvider(Responsive)
 
-const ResponsiveGridLayout = WidthProvider( Responsive );
+function App () {
+  console.log('in app')
 
-function App() {
-  console.log( "redner app" );
+  const { username, setUsername } = useContext(MyContext)
 
+  const usernameInput = useRef()
 
-  let All = [...aboutMeComponentData, ...socialIconComponentData, ...imageData];
-  console.log( All );
-  console.log( All[0].category );
-
-
-
-
+  let All = [...aboutMeComponentData, ...socialIconComponentData, ...imageData]
 
   const lg_layout = [
-   
-    { i: 'aboutme-main', x: 0, y: 0, w: 9, h: 6, },
-    { i: 'map', x: 9, y: 0, w: 3, h: 3, },
-    { i: 'linkedin', x: 9, y: 3, w: 3, h: 3, },
+    { i: 'aboutme-main', x: 0, y: 0, w: 9, h: 6 },
+    { i: 'map', x: 9, y: 0, w: 3, h: 3 },
+    { i: 'linkedin', x: 9, y: 3, w: 3, h: 3 }
     //{ i: 'github', x: 0, y: 6, w: 3, h: 3, },
-  ];
+  ]
 
   const md_layout = [
-   
-    { i: 'aboutme-main', x: 0, y: 0, w: 9, h: 4, },
-    { i: 'map', x: 9, y: 0, w: 3, h: 2, },
-    { i: 'linkedin', x: 9, y: 3, w: 3, h: 2, },
+    { i: 'aboutme-main', x: 0, y: 0, w: 9, h: 4 },
+    { i: 'map', x: 9, y: 0, w: 3, h: 2 },
+    { i: 'linkedin', x: 9, y: 3, w: 3, h: 2 }
     //{ i: 'github', x: 0, y: 6, w: 3, h: 2, },
-  ];
+  ]
 
   const xs_layout = [
-   
-    { i: 'aboutme-main', x: 0, y: 0, w: 12, h: 6, },
-    { i: 'map', x: 0, y: 1, w: 6, h: 3, },
-    { i: 'linkedin', x: 6, y: 1, w: 6, h: 3, },
+    { i: 'aboutme-main', x: 0, y: 0, w: 12, h: 6 },
+    { i: 'map', x: 0, y: 1, w: 6, h: 3 },
+    { i: 'linkedin', x: 6, y: 1, w: 6, h: 3 }
     //{ i: 'github', x: 6, y: 2, w: 6, h: 2, },
-  ];
+  ]
 
   const xxs_layout = [
-   
-    { i: 'aboutme-main', x: 0, y: 0, w: 12, h: 6, },
-    { i: 'map', x: 0, y: 1, w: 6, h: 2, },
-    { i: 'linkedin', x: 6, y: 1, w: 6, h: 2, },
+    { i: 'aboutme-main', x: 0, y: 0, w: 12, h: 6 },
+    { i: 'map', x: 0, y: 1, w: 6, h: 2 },
+    { i: 'linkedin', x: 6, y: 1, w: 6, h: 2 }
     // { i: 'github', x: 6, y: 2, w: 6, h: 2, },
-  ];
-
-
-
-
-
-
+  ]
 
   const layoutinit = {
     lg: lg_layout,
     md: lg_layout,
     sm: md_layout,
     xs: xs_layout,
-    xxs: xxs_layout,
+    xxs: xxs_layout
   }
 
-
-  const [layout, setlayout] = useState( layoutinit )
-  const [visibleItem, setvisibleItem] = useState( "all" )
-  const [data, setdata] = useState( All )
-
-
+  const [layout, setlayout] = useState(layoutinit)
+  const [visibleItem, setvisibleItem] = useState('all')
+  const [data, setdata] = useState(All)
 
   const removeAllActive = () => {
-    const allTabSliderText = document.querySelectorAll( ".tab-slider--text" )
-    allTabSliderText.forEach( ( item ) => {
-      item.classList.remove( "active" )
-    } )
+    const allTabSliderText = document.querySelectorAll('.tab-slider--text')
+    allTabSliderText.forEach(item => {
+      item.classList.remove('active')
+    })
   }
 
-
-
-
-
-
-
-
-  console.log( "render" );
-
-
-
+  console.log('render App')
 
   return (
-    <div className="App">
-      <HashRouter>
-        {/* NAVIGATION */ }
-        <div class="container">
-          <img class="logo" src={ logo } alt="logo" />
-         
-          <a href={ `mailto:${mail}` }>contact</a>
+    <Router>
+      <div className='App'>
+        {/* NAVIGATION */}
 
-        </div>
-        <div className="page">
-
-          <Switch>
-          
-            <Route exact path="/">
-              {/* PAGE */ }
-              <ResponsiveGridLayout
+        <Switch>
+          <Route exact path='/'>
+            {/* PAGE */}
+            {/* <ResponsiveGridLayout
 
                 className="layout"
                 layouts={ layout }
@@ -155,26 +128,48 @@ function App() {
 
                 } ) }
 
-              </ResponsiveGridLayout>
-              <div className="showPortfolio-page">
-              <ShowPortfolio githubUsername={"ppphiiil"} 
-              colorShema = {{
-                  javascript: "#92efdf",
-                  html: "#F6ECA7",
-                  scss: "#bde1e7",
-                  css: "#a1bbde"
-              }}/>
+              </ResponsiveGridLayout> */}
+            <div className='showPortfolio-page'>
+              <div className='container-input'>
+                <h1>Github Portfolio-Maker</h1>
+                <div className='username-input'>
+                  <Input
+                    ref={usernameInput}
+                    name='username'
+                    size='large'
+                    placeholder='Github Username'
+                  />
+
+                  <Button
+                    type='primary'
+                    size='large'
+                    placeholder='Github Username'
+                    onClick={() =>
+                      setUsername(usernameInput.current.state.value)
+                    }
+                  >
+                    Create Portfolio Preview
+                  </Button>
+                </div>
               </div>
 
-            </Route>
-          </Switch>
-        </div>
-
-
-      </HashRouter>
-    </div>
-  );
+              {username && (
+                <ShowPortfolio
+                  githubUsername={username}
+                  colorShema={{
+                    javascript: '#92efdf',
+                    html: '#F6ECA7',
+                    scss: '#bde1e7',
+                    css: '#a1bbde'
+                  }}
+                />
+              )}
+            </div>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
-
-export default App;
+export default App
