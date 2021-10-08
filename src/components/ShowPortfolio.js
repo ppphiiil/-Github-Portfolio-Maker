@@ -16,9 +16,10 @@ import OwnerInfos from './OwnerInfos'
  */
 import { Octokit } from '@octokit/core'
 const octokit = new Octokit({
-  auth: `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`
+  auth: process.env.REACT_APP_GITHUB
 })
 
+console.log("process.env.REACT_APP_GITHUB",process.env.REACT_APP_GITHUB);
 /**
  * FOR FETCHING DATA
  */
