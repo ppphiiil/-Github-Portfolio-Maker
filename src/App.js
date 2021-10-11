@@ -3,10 +3,11 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import React, { useEffect, useState, useRef, useContext } from 'react'
 import './App.scss'
 import { Button, Input } from 'antd'
-import 'antd/dist/antd.css'
+
 import {
   aboutMeComponentData,
   socialIconComponentData,
+
   articlesData,
   imageData,
   mail
@@ -81,6 +82,15 @@ function App () {
 
   console.log('render App')
 
+  const handleKeyDown=(e)=>{
+  if (e.key === 'Enter') {
+      setUsername(usernameInput.current.state.value)
+    }
+  }
+  
+  
+  
+
   return (
     <Router>
       <div className='App'>
@@ -130,17 +140,24 @@ function App () {
 
               </ResponsiveGridLayout> */}
             <div className='showPortfolio-page'>
-              <div className='container-input'>
+              <div className='container'>
                 <h1>Github Portfolio-Maker</h1>
+              
                 <div className='username-input'>
                   <Input
+                  style={{textAlign:"center"}}
                     ref={usernameInput}
                     name='username'
+                    keyboard="true"
+                    autofocus="true"
+
                     size='large'
                     placeholder='Github Username'
+                    onKeyDown={(e)=>handleKeyDown(e)}
                   />
 
                   <Button
+                  style={{marginTop:"0.5rem"}}
                     type='primary'
                     size='large'
                     placeholder='Github Username'
@@ -148,7 +165,7 @@ function App () {
                       setUsername(usernameInput.current.state.value)
                     }
                   >
-                    Create Portfolio Preview
+                    Create Github-Portfolio
                   </Button>
                 </div>
               </div>

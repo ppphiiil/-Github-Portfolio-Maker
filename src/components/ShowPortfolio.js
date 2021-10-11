@@ -4,13 +4,18 @@ import { createGlobalStyle } from 'styled-components'
 
 import styled from 'styled-components'
 
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 /**
  * CSS
  */
 import './ShowPortfolio.css'
 import MyContext from '../MyContext'
 import OwnerInfos from './OwnerInfos'
+
+import {
+
+  repoTestData
+} from '../testdata'
 /**
  * FOR GITHUB API
  */
@@ -19,7 +24,6 @@ const octokit = new Octokit({
   auth: process.env.REACT_APP_GITHUB
 })
 
-console.log("process.env.REACT_APP_GITHUB",process.env.REACT_APP_GITHUB);
 /**
  * FOR FETCHING DATA
  */
@@ -91,6 +95,7 @@ const BatchLanguageFilter = styled.div`
  */
 function ShowPortfolio ({ githubUsername, colorShema }) {
   console.log('in ShowPortfolio')
+  console.log("repoTestData",repoTestData);
   const { username, setUsername } = useContext(MyContext)
 
   console.log('in ShowPortfolio githubUsername=>', githubUsername)
@@ -112,11 +117,24 @@ function ShowPortfolio ({ githubUsername, colorShema }) {
     setUsername(githubUsername)
 
     const getData = async () => {
-      const fetchedData = await axios.get(
-        `https://github-portfolio-maker.herokuapp.com/api/filtered/${githubUsername}`
-      )
-      console.log('fetchedData=>', fetchedData)
+      
+     
+      let fetchedData=[];
+      if(process.env.REACT_APP_TESTDATA==="1"){
+          console.log("1");
+fetchedData=repoTestData;
+      }else{
+           console.log("0...");
+fetchedData= await axios.get(
+        `${process.env.REACT_APP_LOCALHOST || "https://github-portfolio-maker.herokuapp.com" }/api/filtered/${githubUsername}`)
+      }
 
+        
+        
+        
+     
+
+ console.log('fetchedData=>', fetchedData);
       setRepoData(fetchedData.data.repoData.data)
       setOwnerData(fetchedData.data.ownerData)
       setCountedLanguages(fetchedData.data.repoData.countedLanguages)
@@ -166,6 +184,7 @@ function ShowPortfolio ({ githubUsername, colorShema }) {
                 description={repo.description}
                 languages_progress={repo.languages}
                 colorShema={colorShema}
+                repoUrl={repo.repo_url}
               />
             </div>
           )
@@ -246,77 +265,150 @@ function ShowPortfolio ({ githubUsername, colorShema }) {
 
 const ContainerImage = styled.div`
   width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  min-height: 100%;
 
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+    
+
+  /* border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px; */
   transform: translateY(0px);
-  transition: all 500ms ease-in-out;
+
+  /* overflow: hidden; */
 
   @media (max-width: 768px) {
+    width: 100%;
     background-position: 0% 0%;
     background-size: 100%;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 30px;
   }
+
+  .image {
+    width: 100%;
+   height:100%;
+  min-height: 300px;
+    display:block;
+    border-style:none;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position-x: 0;
+  }
 `
 
-const ContainerDetails = styled.div`
+const Details = styled.div`
   font-weight: 600;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000;
+  flex-direction: column;
+ height: 100%;
+ min-height: 300px;
+ 
   color: white;
   width: 100%;
+  background-color: #ffffff;
 
-  position: absolute;
-  top: 100%;
+  padding: 30px 50px 30px 30px;
+
+
+  
+
+  @media (max-width: 768px) {
+    /* flex-grow:1; */
+    width: 100%;
+  }
+`
+
+const Actions = styled.div`
+/* position:absolute; */
+height:100px;
+width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-evenly;
+  align-items: center;
+  position:absolute;
+
+
+background-color:#000000;
+color:#ffffff;
+bottom:-100px;
+  
   transition: all 500ms ease-in-out;
 
   @media (max-width: 768px) {
     /* flex-grow:1; */
+    width: 100%;
   }
 `
 
-const Container = styled.div`
-  width: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 0px solid green;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
 
-  &:hover {
-    font-size: 1rem;
-    overflow: hidden;
+const WhiteButton = styled.div`
+  background-color: #000000;
+  color: #ffffff;
+  min-width: 50px;
+  padding: 9px 12px;
+  margin-right: 5px;
+  margin-bottom: 5px;
 
-    ${ContainerDetails} {
-      transform: translateY(-30px);
-      transition: all 500ms ease-in-out;
-    }
-    ${ContainerImage} {
-      display: block;
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-      transform: translateY(-30px);
-      transition: all 500ms ease-in-out;
-    }
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  border-radius: 32px;
+  font-size: 0.8rem;
+  /* font-weight:700; */
+  text-transform: lowercase;
+  border: 3px solid #ffffff;
+
+  border-radius: 100px;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 1rem;
+
+  margin-right: 10px;
+  /* box-shadow:#00000011 3px 3px 5px; */
+`
+
+
+const CardContent = styled.div`
+  display:flex;
+  flex-direction: row;
+
+  min-height: 100%;
+
+  width:100%;
+ 
+  transition: all 500ms ease-in-out;
+
+@media (max-width: 768px) {
+   flex-direction: column;
   }
+`
+
+
+const Container = styled.div`
+display:flex;
+  width: 100%;
+
+
+  min-height: 100%;
+  transition: all 500ms ease-in-out;
+
+  /* position:absolute; */
+  
+ 
+  
+
+
+
+  
 
   @media (max-width: 768px) {
     height: calc(50vw);
-
+    flex-direction: column;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: #00000028 0px 10px 10px -4px;
     /* flex-shrink:1; */
   }
@@ -325,7 +417,7 @@ const Container = styled.div`
 const BatchContainer = styled.div`
   width: 100%;
   flex-wrap: wrap;
-  height: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -341,6 +433,7 @@ const BatchContainerSide = styled.div`
   position: absolute;
   top: 20px;
   right: -40px;
+  z-index: 100000000;
 
   @media (max-width: 768px) {
     right: -30px;
@@ -433,34 +526,47 @@ const BatchDemo = styled.div`
   }
 `
 
-const Details = styled.div`
-  width: 100%;
-  padding: 30px 50px 30px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    /* flex-grow: 2; */
-  }
-`
-
 const Card = styled.div`
-  display: flex;
+  width: 100%;
   margin: 50px 0px;
-  height: 300px;
-  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  position:relative;
+  
+  display:flex;
+  flex-direction:column;
+
   border-radius: 30px;
-  background: #f5f5f5;
+  /* background: #000000; */
+  /* overflow: hidden; */
   box-shadow: 17px 17px 34px #dfdfdf, -17px -17px 34px #ffffff;
   /* box-shadow:  16px 16px 18px #cfcfcf,
              -16px -16px 18px #ffffff;  */
 
+             &:hover {
+    font-size: 1rem;
+    
+
+ 
+    ${Container} {
+      transform: translateY(-100px);
+      transition: all 500ms ease-in-out;
+    }
+     ${Actions} {
+      /* transform: translateY(0px); */
+      transition: all 500ms ease-in-out;
+      bottom:0px;
+     
+    }
+  }
+
+
   @media (max-width: 768px) {
-    flex-direction: column;
     height: 100%;
   }
 `
+
+
 
 const CardLink = styled.div`
   width: 100%;
@@ -483,6 +589,12 @@ const SmallInfo = styled.div`
 const Description = styled.p`
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
+  color: black;
+`
+
+const CardContainer = styled.div`
+  position:relative;
+  transition: all 500ms ease-in-out;
 `
 
 function CaseStudy ({
@@ -491,79 +603,103 @@ function CaseStudy ({
   visible,
   mainimage,
   title,
+  repoUrl,
   description,
   languages_progress,
   colorShema
 }) {
   return (
     <>
-      <Card
-        style={visible === false ? { opacity: '30%' } : { opacity: '100%' }}
-      >
-        <a target='_blank' href={demolink} rel='noreferrer'>
-          <CardLink />
-        </a>
+      
+      <CardContainer>
+        <Card
+          style={visible === false ? { opacity: '30%' } : { opacity: '100%' }}
+        >
+          {/* <CardLink /> */}
+         
+           
+    
 
-        <Container>
-          <>
-            {mainimage ? (
-              <ContainerImage
-                style={{ backgroundImage: `url( ` + `"${mainimage}` + `" )` }}
-              ></ContainerImage>
-            ) : (
-              <img
-                className='portfolio-image'
-                src={'/images/no-image.jpg'}
-                alt=''
-              />
-            )}
-          </>
-        </Container>
+          <Container>
+           
+              {mainimage ? (
+                <ContainerImage>
+                  <div className="image"
+                    style={{
+                      backgroundImage: `url( ` + `"${mainimage}` + `" )`
+                    }}
+                   
+                  />
+                </ContainerImage>
+              ) : (
+                <img
+                  className='portfolio-image'
+                  src={'/images/no-image.jpg'}
+                  alt=''
+                />
+              )}
+            
 
-        <Details>
-          <div>
-            <h3 className='portfolio-h3'>
-              {title[0] === '-' ? title.substr(1, title.length) : title}
-            </h3>
-            <Description>{description}</Description>
-          </div>
-          <div>
-            <SmallInfo>
-              <BatchContainer>
-                {languages_topics
-                  ? languages_topics.map((topics, key) => {
+            <Details>
+              <div>
+                <h3 className='portfolio-h3'>
+                  {title[0] === '-' ? title.substr(1, title.length) : title}
+                </h3>
+                <Description>{description}</Description>
+              </div>
+              <div>
+                <SmallInfo>
+                  <BatchContainer>
+                    {languages_topics
+                      ? languages_topics.map((topics, key) => {
+                          return (
+                            <BatchCaseStudy key={key}>{topics} </BatchCaseStudy>
+                          )
+                        })
+                      : null}
+                  </BatchContainer>
+                </SmallInfo>
+              </div>
+            </Details>
+       
+            
+         
+           
+            </Container>
+
+            <Actions>
+
+            {repoUrl && <a target='_blank' href={repoUrl} rel='noreferrer'>
+           <WhiteButton>Github Code</WhiteButton> </a> }
+           
+           {demolink && <a target='_blank' href={demolink} rel='noreferrer'>
+           <WhiteButton>Live Demo</WhiteButton> </a> }
+           
+           </Actions> 
+         
+        </Card>
+         <BatchContainerSide>
+              {languages_progress
+                ? Object.keys(languages_progress)
+                    .sort()
+                    .map((language, key) => {
                       return (
-                        <BatchCaseStudy key={key}>{topics} </BatchCaseStudy>
+                        <BatchLanguage
+                          style={{
+                            backgroundColor: `${
+                              colorShema[language.toLowerCase()]
+                            }`
+                          }}
+                          key={key}
+                        >
+                          {language}
+                        </BatchLanguage>
                       )
                     })
-                  : null}
-              </BatchContainer>
-            </SmallInfo>
-            <SmallInfo>
-              <BatchContainerSide>
-                {languages_progress
-                  ? Object.keys(languages_progress)
-                      .sort()
-                      .map((language, key) => {
-                        return (
-                          <BatchLanguage
-                            style={{
-                              backgroundColor: `${
-                                colorShema[language.toLowerCase()]
-                              }`
-                            }}
-                            key={key}
-                          >
-                            {language}
-                          </BatchLanguage>
-                        )
-                      })
-                  : null}
-              </BatchContainerSide>
-            </SmallInfo>
-          </div>
-        </Details>
-      </Card>
+                : null}
+            </BatchContainerSide>
+            </CardContainer>
+    
     </>
   )
 }
