@@ -95,7 +95,7 @@ const BatchLanguageFilter = styled.div`
  */
 function ShowPortfolio ({ githubUsername, colorShema }) {
   console.log('in ShowPortfolio')
-  console.log("repoTestData",repoTestData);
+  
   const { username, setUsername } = useContext(MyContext)
 
   console.log('in ShowPortfolio githubUsername=>', githubUsername)
@@ -118,18 +118,20 @@ function ShowPortfolio ({ githubUsername, colorShema }) {
 
     const getData = async () => {
       
+      let fetchedData= await axios.get(
+        `${process.env.REACT_APP_LOCALHOST}/api/filtered/${githubUsername}`)
      
-      let fetchedData=[];
-      if(process.env.REACT_APP_TESTDATA==="1"){
-          console.log("1");
-fetchedData=repoTestData;
-      }else{
-           console.log("0...");
-fetchedData= await axios.get(
-        `${process.env.REACT_APP_LOCALHOST || "https://github-portfolio-maker.herokuapp.com" }/api/filtered/${githubUsername}`)
-      }
-
-        
+//       let fetchedData=[];
+//       if(process.env.REACT_APP_TESTDATA==="1"){
+//           console.log("1");
+// fetchedData=repoTestData;
+//       }else{
+//            console.log("0...=>",`${process.env.REACT_APP_LOCALHOST || "https://github-portfolio-maker.herokuapp.com" }/api/filtered/${githubUsername}`);
+// fetchedData= await axios.get(
+//         `${process.env.REACT_APP_LOCALHOST}/api/filtered/${githubUsername}`)
+//       }
+// 
+//         
         
         
      
