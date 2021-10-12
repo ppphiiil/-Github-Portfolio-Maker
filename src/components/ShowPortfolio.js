@@ -1,10 +1,7 @@
 import Spinner from 'react-bootstrap/Spinner'
 import React, { useEffect, useState, useContext } from 'react'
-import { createGlobalStyle } from 'styled-components'
-
 import styled from 'styled-components'
-
-import { Link, useParams } from 'react-router-dom'
+import {repoTestData} from '../testdata'
 /**
  * CSS
  */
@@ -12,10 +9,9 @@ import './ShowPortfolio.css'
 import MyContext from '../MyContext'
 import OwnerInfos from './OwnerInfos'
 
-import {
 
-  repoTestData
-} from '../testdata'
+
+
 /**
  * FOR GITHUB API
  */
@@ -23,6 +19,9 @@ import { Octokit } from '@octokit/core'
 const octokit = new Octokit({
   auth: process.env.REACT_APP_GITHUB
 })
+
+
+
 
 /**
  * FOR FETCHING DATA
@@ -49,35 +48,31 @@ const StyleCounterNumber = styled.p`
 
 const StyleCounterNumberFilled = styled.p`
   color: #00000071;
-  /* height: 25px;
-  width: 25px;
-  border-radius:50%; */
   font-size: 1rem;
   text-align: center;
-
   margin: 0px;
 `
 
 const BatchContainerFilter = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: top;
-  align-items: flex-start;
+flex-wrap: wrap;
+  width:100%;
   text-align: center;
-  color: white;
-  height: 100%;
+  
   margin-top: 30px;
   margin-bottom: 50px;
-  width: 100%;
+  
 `
 
 const BatchLanguageFilter = styled.div`
   background-color: #afafaf;
   color: #000000;
-  width: 100%;
+
   padding: 3px 9px;
   margin: 2.5px 2.5px 2.5px 0px;
   display: inline;
+  min-width: max-content;
+  height: 100%;
 
   font-size: 0.7rem;
   text-transform: lowercase;
@@ -85,8 +80,6 @@ const BatchLanguageFilter = styled.div`
   border: 0px solid #f1f2f8;
   border-radius: 5px;
   cursor: initial;
-
-  /* box-shadow:#00000011 3px 3px 5px; */
 `
 
 /**
@@ -197,7 +190,7 @@ fetchedData= await axios.get(
   let languagesFilterElement = countedLanguages => {
     if (!countedLanguages) return null
     let array = []
-    console.log('countedLanguages=>', countedLanguages)
+
     for (const [key, value] of Object.entries(countedLanguages)) {
       array.push(
         <BatchLanguageFilter
@@ -266,14 +259,7 @@ fetchedData= await axios.get(
 const ContainerImage = styled.div`
   width: 100%;
   min-height: 100%;
-
-    
-
-  /* border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px; */
   transform: translateY(0px);
-
-  /* overflow: hidden; */
 
   @media (max-width: 768px) {
     width: 100%;
@@ -296,6 +282,12 @@ const ContainerImage = styled.div`
     background-size: cover;
     background-position-x: 0;
   }
+
+
+  @media (max-width: 768px) {
+    box-shadow: #00000028 0px 10px 10px -4px;
+  }
+   
 `
 
 const Details = styled.div`
@@ -311,11 +303,11 @@ const Details = styled.div`
 
   padding: 30px 50px 30px 30px;
 
-
+justify-content: space-between;
   
 
   @media (max-width: 768px) {
-    /* flex-grow:1; */
+    
     width: 100%;
   }
 `
@@ -340,6 +332,8 @@ bottom:-100px;
   @media (max-width: 768px) {
     /* flex-grow:1; */
     width: 100%;
+    position:relative;
+    bottom:0px;
   }
 `
 
@@ -370,21 +364,6 @@ const WhiteButton = styled.div`
 `
 
 
-const CardContent = styled.div`
-  display:flex;
-  flex-direction: row;
-
-  min-height: 100%;
-
-  width:100%;
- 
-  transition: all 500ms ease-in-out;
-
-@media (max-width: 768px) {
-   flex-direction: column;
-  }
-`
-
 
 const Container = styled.div`
 display:flex;
@@ -404,12 +383,12 @@ display:flex;
   
 
   @media (max-width: 768px) {
-    height: calc(50vw);
+   
     flex-direction: column;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     /* overflow: hidden; */
-    box-shadow: #00000028 0px 10px 10px -4px;
+   
     /* flex-shrink:1; */
   }
 `
@@ -449,8 +428,10 @@ const BatchCaseStudy = styled.div`
   margin-right: 5px;
   margin-bottom: 5px;
   display: flex;
+  justify-content: center;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   border-radius: 32px;
+  
   font-size: 0.8rem;
   /* font-weight:700; */
   text-transform: lowercase;
@@ -463,7 +444,13 @@ const BatchCaseStudy = styled.div`
   font-size: 1rem;
 
   margin-right: 10px;
-  /* box-shadow:#00000011 3px 3px 5px; */
+  
+  @media (max-width: 768px) {
+   font-size: 0.7rem;
+   font-weight: 100;
+  padding: 7px 9px;
+  }
+
 `
 
 const Batch = styled.div`
@@ -562,7 +549,8 @@ const Card = styled.div`
 
 
   @media (max-width: 768px) {
-    height: 100%;
+ 
+    
   }
 `
 
