@@ -57,7 +57,7 @@ const BatchContainerFilter = styled.div`
   display: flex;
 flex-wrap: wrap;
   width:100%;
-  text-align: center;
+ 
   
   margin-top: 30px;
   margin-bottom: 50px;
@@ -67,11 +67,12 @@ flex-wrap: wrap;
 const BatchLanguageFilter = styled.div`
   background-color: #afafaf;
   color: #000000;
-
+  flex-grow: 1;
   padding: 3px 9px;
   margin: 2.5px 2.5px 2.5px 0px;
   display: inline;
-  min-width: max-content;
+  
+  
   height: 100%;
 
   font-size: 0.7rem;
