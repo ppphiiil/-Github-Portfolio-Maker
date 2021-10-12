@@ -22,12 +22,13 @@ import Image from './components/Image'
 import SocialIcon from './components/SocialIcon'
 import ShowPortfolio from './components/ShowPortfolio'
 
-const ResponsiveGridLayout = WidthProvider(Responsive)
+
 
 function App () {
   console.log('in app')
 
   const { username, setUsername } = useContext(MyContext)
+  const { loadingData, setLoadingData } = useContext(MyContext)
 
   const usernameInput = useRef()
 
@@ -162,8 +163,10 @@ function App () {
                     type='primary'
                     size='large'
                     placeholder='Github Username'
-                    onClick={() =>
+                    onClick={() =>{
+                      setLoadingData(true)
                       setUsername(usernameInput.current.state.value)
+                      }
                     }
                   >
                     Create Github-Portfolio

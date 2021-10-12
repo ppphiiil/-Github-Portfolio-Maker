@@ -7,6 +7,7 @@ import {repoTestData} from '../testdata'
  */
 import './ShowPortfolio.css'
 import MyContext from '../MyContext'
+
 import OwnerInfos from './OwnerInfos'
 
 
@@ -99,7 +100,8 @@ function ShowPortfolio ({ githubUsername, colorShema }) {
 
   const [countedLanguages, setCountedLanguages] = useState(null)
   const [countedTopics, setCountedTopics] = useState(null)
-  const [loadingData, setLoadingData] = useState(false)
+  
+  const { loadingData, setLoadingData } = useContext(MyContext)
   //Context
   //const {username, setUsername} = useContext (MyContext);
 
@@ -111,6 +113,7 @@ function ShowPortfolio ({ githubUsername, colorShema }) {
     setUsername(githubUsername)
 
     const getData = async () => {
+      setLoadingData(true)
       
      
       let fetchedData=[];
@@ -120,7 +123,7 @@ fetchedData=repoTestData;
       }else{
            console.log("0...=>",`${process.env.REACT_APP_LOCALHOST || "https://github-portfolio-maker.herokuapp.com" }/api/filtered/${githubUsername}`);
 fetchedData= await axios.get(
-        `${process.env.REACT_APP_LOCALHOST || "https://github-portfolio-maker.herokuapp.com" }/api/filtered/${githubUsername}`)
+        `${process.env.REACT_APP_LOCALHOST || "https://github-portfolio-maker.herokuapp.com" }/api/${githubUsername}`)
       }
 
         
@@ -133,7 +136,7 @@ fetchedData= await axios.get(
       setOwnerData(fetchedData.data.ownerData)
       setCountedLanguages(fetchedData.data.repoData.countedLanguages)
       setCountedTopics(fetchedData.data.repoData.countedTopics)
-      setLoadingData(true)
+      setLoadingData(false)
     }
     getData()
   }, [username])
@@ -244,13 +247,17 @@ fetchedData= await axios.get(
 
   return (
     <div className='App'>
+    {loadingData === true ? spinner :
+    <>
       <OwnerInfos ownerData={ownerData} />
       <BatchContainerFilter>
         {languagesFilterElement(countedLanguages)}
       </BatchContainerFilter>
       <BatchContainer>{topicsFilterElement(countedTopics)}</BatchContainer>
 
-      {loadingData === false ? spinner : getRepoElements(repoData)}
+       {getRepoElements(repoData)}
+       </>
+       }
     </div>
   )
 }
@@ -550,8 +557,12 @@ const Card = styled.div`
 
 
   @media (max-width: 768px) {
- 
-    
+      &:hover {
+  ${Container} {
+      transform: translateY(0px);
+      transition: all 500ms ease-in-out;
+    }
+  }
   }
 `
 

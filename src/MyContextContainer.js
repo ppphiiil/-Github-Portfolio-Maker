@@ -3,12 +3,14 @@ import MyContext from './MyContext.js'
 
 const MyContextContainer = ({ children }) => {
   const [username, setUsername] = useState(null)
-
+  const [loadingData, setLoadingData] = useState(false)
   return (
     <MyContext.Provider
       value={{
         username,
-        setUsername
+        setUsername,
+        loadingData, 
+        setLoadingData
       }}
     >
       {children}
