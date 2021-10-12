@@ -94,10 +94,11 @@ function App () {
   return (
     <Router>
       <div className='App'>
+      Hallo
         {/* NAVIGATION */}
 
         <Switch>
-          <Route exact path='/'>
+          <Route path='/'>
             {/* PAGE */}
             {/* <ResponsiveGridLayout
 
